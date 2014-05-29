@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:background="@android:drawable/title_bar" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left|center_vertical"
+        android:src="@drawable/ic_launcher" />
+    
+    <TextView
+        android:id="@+id/textnotify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:layout_weight="1"
+        android:maxLines="1"
+        android:layout_gravity="center"
+        android:textColor="#0000ff"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/fromnotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:background="@drawable/custom_list_x_btn" />
+
+    
+
+</LinearLayout>

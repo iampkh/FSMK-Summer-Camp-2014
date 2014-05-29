@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fsmk_menu_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="60dp"
+            android:src="@drawable/fsmk_logo" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:text="Free Software Movement Karnataka"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp" >
+
+        <Button
+            android:id="@+id/schedule"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="Schedule" />
+        <Button
+            android:id="@+id/volunteer"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="Volunteers" />
+        <Button
+            android:id="@+id/reminder"
+            android:layout_width="80dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="80dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="Reminder" />
+
+    </LinearLayout>
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="40dp" >
+
+        <Button
+            android:id="@+id/fb"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="Facebook" />
+        <Button
+            android:id="@+id/tw"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="Twitter" />
+        <Button
+            android:id="@+id/aboutus"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/old_button_bg"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:text="About us" />
+
+    </LinearLayout>
+
+</LinearLayout>

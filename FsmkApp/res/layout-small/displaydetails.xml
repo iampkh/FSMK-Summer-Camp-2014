@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   
+    android:background="@drawable/notepaper_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/customline"
+        android:textAlignment="center" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/clock_shifter_on" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/txtEvent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:ellipsize="marquee"
+                android:maxLines="3"
+                android:text="@string/event_name"
+                android:textAllCaps="true"
+                android:textColor="#000fff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtTitleSpeaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/speaker_name"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSpeaker"
+                 android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                 android:text="@string/speaker_name"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtTitleDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/description"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtTitleSchedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtSchedule"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule" />
+
+            <TextView
+                android:id="@+id/txtTitleVenue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/venue"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtVenue"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/venue" />
+
+            <Button
+                android:id="@+id/btnSetAlarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setAlarm"
+                android:text="@string/setAlarm" />
+
+            <Button
+                android:id="@+id/btnAbtVolunteers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="aboutVoulteers"
+                android:text="@string/aboutVolunteers" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
