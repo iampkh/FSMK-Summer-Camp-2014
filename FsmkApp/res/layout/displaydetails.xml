@@ -3,10 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
    
-    android:background="@drawable/notepaper_bg"
     android:orientation="vertical" >
+    
 
     <RelativeLayout
+        android:id="@+id/containerLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/customline"
@@ -18,7 +19,7 @@
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/clock_shifter_on" />
+            android:src="@drawable/fsmk_logo" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -59,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/speaker_name"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
             <TextView
@@ -66,6 +68,7 @@
                  android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                  android:text="@string/speaker_name"
+                 android:textColor="#000000"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -73,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
             <TextView
@@ -81,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
+                android:textColor="#000000"
                 android:textAlignment="center" />
 
             <TextView
@@ -88,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/schedule"
+                android:textColor="#000000"
                 android:textStyle="bold" />
 
             <TextView
@@ -95,12 +101,14 @@
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:text="@string/schedule" />
 
             <TextView
                 android:id="@+id/txtTitleVenue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:text="@string/venue"
                 android:textStyle="bold" />
 
@@ -109,6 +117,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#000000"
                 android:text="@string/venue" />
 
             <Button
@@ -116,6 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="setAlarm"
+                android:textColor="#000000"
                 android:text="@string/setAlarm" />
 
             <Button
@@ -123,6 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="aboutVoulteers"
+                android:textColor="#000000"
                 android:text="@string/aboutVolunteers" />
         </LinearLayout>
     </ScrollView>

@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+   android:background="@drawable/customline"
+    android:orientation="horizontal" >
+
+    
+
+    <TextView
+        android:id="@+id/volName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:layout_marginLeft="4dp"
+        android:typeface="normal"
+        android:text="@string/volunteer_name"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"/>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:src="@drawable/phone_logo" />
+
+</LinearLayout>

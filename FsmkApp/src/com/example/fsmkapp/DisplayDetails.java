@@ -4,6 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import com.fsmk.fragments.ViewPagerAdapter;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -12,6 +17,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -20,23 +26,38 @@ import android.widget.TextView;
 public class DisplayDetails extends Activity {
 	TextView txtView;
 	Bundle bundle;
+	ViewPager mViewPager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.displaydetails);
+		setContentView(R.layout.display_holder);
 
+		mViewPager=(ViewPager) findViewById(R.id.viewPager);
+		
 		Intent intent = getIntent();
 		 bundle = intent.getBundleExtra("DetailsBundle");
 
-		String event = bundle.getString("Event");
-		String description = bundle.getString("Description");
-		String schedule = bundle.getString("Date") + " \n "
-				+ bundle.getString("Time");
+		String event = bundle.getString("headline");
+		String description = bundle.getString("text");
+		String schedule = bundle.getString("startDate") + " \n "
+				+ bundle.getString("time");
+		
+		
+		JSONArray mJsonArray = null;
+		try {
+			mJsonArray = new JSONArray(bundle.getString("jsonArrayString"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ViewPagerAdapter mViewpagerAdapter=new ViewPagerAdapter(getApplicationContext(), mJsonArray);
+		mViewPager.setAdapter(mViewpagerAdapter);
+		mViewPager.setCurrentItem(bundle.getInt("position"));
 
-		setText(event, R.id.txtEvent);
+		/*setText(event, R.id.txtEvent);
 		setText(description, R.id.txtDescription);
-		setText(schedule, R.id.txtSchedule);
+		setText(schedule, R.id.txtSchedule); */
 		
 		
 	}
@@ -56,11 +77,11 @@ public class DisplayDetails extends Activity {
 		return eventDate;
 	}
 
-	private void setText(String text, int id) {
+	/*private void setText(String text, int id) {
 		Log.d("pkhtag", "text inside setTetx() ---------->" + text);
 		txtView = (TextView) findViewById(id);
 		txtView.setText(text);
-	}
+	}*/
 
 	public void setAlarm(View view) {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -76,7 +97,7 @@ public class DisplayDetails extends Activity {
 		alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(1*60*1000),broadcastPendingIntent );
 	}
 	
-	public void aboutVoulteers(View view) {
+	/*public void aboutVoulteers(View view) {
 		Intent intentVoulteer=new Intent(getApplicationContext(),VolunteersActivity.class);
 		intentVoulteer.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		Bundle bundleVolunteer=new Bundle();
@@ -86,5 +107,5 @@ public class DisplayDetails extends Activity {
 		bundleVolunteer.putString("contact", bundle.getString("contact"));
 		intentVoulteer.putExtra("VolunteerBundle", bundleVolunteer);
 		getApplicationContext().startActivity(intentVoulteer);
-	}
+	}*/
 }

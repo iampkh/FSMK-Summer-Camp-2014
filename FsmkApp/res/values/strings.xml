@@ -6,6 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="schedule">Schedule :</string>
     <string name="date">05-12-2014</string>
+    <string name="volunteer_name">Volunteer Name</string>
     <string name="time">4.00 \n \t\t to \n 5.00</string>
     <string name="events">Publish Speaker</string>
     <string name="setAlarm">Set Alarm</string>

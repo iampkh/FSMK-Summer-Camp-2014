@@ -62,13 +62,13 @@ public class CustomAdapter extends BaseAdapter {
 		try {
 			/*JSONArray jsonArrEvents=mjsonEventDetails.getJSONArray("Events");
 			String time=jsonArrEvents.getJSONObject(position).get("Time").toString();*/
-			String time=meventDetailsArray.getJSONObject(position).get("Time").toString();
+			String time=meventDetailsArray.getJSONObject(position).get("time").toString();
 			time=time.replace("-", "\n \tto \n");
 			
 			/*txtDate.setText(jsonArrEvents.getJSONObject(position).get("Date").toString());
 			txtEvent.setText(jsonArrEvents.getJSONObject(position).get("Schedule").toString());*/
-			txtDate.setText(meventDetailsArray.getJSONObject(position).get("Date").toString());
-			txtEvent.setText(meventDetailsArray.getJSONObject(position).get("Schedule").toString());
+			txtDate.setText(meventDetailsArray.getJSONObject(position).get("startDate").toString());
+			txtEvent.setText(meventDetailsArray.getJSONObject(position).get("headline").toString());
 			txtTime.setText(time);
 		} catch (JSONException e) {
 			e.printStackTrace();

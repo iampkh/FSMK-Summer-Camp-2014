@@ -1,0 +1,166 @@
+{
+    "volunteer": [
+        {
+            "category": "T Shirt Design and Printing",
+            "name": [
+                {
+                    "name": "Shashank"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "9060114538"
+                }
+            ],
+            "email": [
+                {
+                    "email": "ShashaShashaShashaShashank@gmail.com"
+                }
+            ]
+        },
+        {
+            "category": "Camp Manual",
+            "name": [
+                {
+                    "name": "Abhiram"
+                },
+                {
+                    "name": "Nitin"
+                },
+                {
+                    "name": "Harshitha"
+                },
+                {
+                    "name": "Rohit"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "9909009009"
+                },
+                {
+                    "contact": "9898909089"
+                },
+                {
+                    "contact": "9000990766"
+                },
+                {
+                    "contact": "7898978769"
+                }
+            ],
+            "email": [
+                {
+                    "email": "abhiram_fsmk_email___khjkhjkh____@fsmk.org"
+                },
+                {
+                    "email": "y.mail"
+                },
+                {
+                    "email": "z.mail"
+                },
+                {
+                    "email": "k.mail"
+                }
+            ]
+        },
+        {
+            "category": "Posters and Banners",
+            "name": [
+                {
+                    "name": "Abhishek"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "09060114538"
+                }
+            ],
+            "email": [
+                {
+                    "email": "abi.mail"
+                }
+            ]
+        },
+        {
+            "category": "T Shirt Design and Printing",
+            "name": [
+                {
+                    "name": "Shashank"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "09060114538"
+                }
+            ],
+            "email": [
+                {
+                    "email": "Shashank@gmail.com"
+                }
+            ]
+        },
+        {
+            "category": "Camp and Manual",
+            "name": [
+                {
+                    "name": "Abhiram"
+                },
+                {
+                    "name": "Nitin"
+                },
+                {
+                    "name": "Harshitha"
+                },
+                {
+                    "name": "Rohit"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "9909009009"
+                },
+                {
+                    "contact": "9898909089"
+                },
+                {
+                    "contact": "9000990766"
+                },
+                {
+                    "contact": "7898978769"
+                }
+            ],
+            "email": [
+                {
+                    "email": "abhiram_fsmk_email@fsmk.org"
+                },
+                {
+                    "email": "y.mail"
+                },
+                {
+                    "email": "z.mail"
+                },
+                {
+                    "email": "k.mail"
+                }
+            ]
+        },
+        {
+            "category": "T Shirt and Design and Printing",
+            "name": [
+                {
+                    "name": "Shashank"
+                }
+            ],
+            "contact": [
+                {
+                    "contact": "9060114538"
+                }
+            ],
+            "email": [
+                {
+                    "email": "Shashank@gmail.com"
+                }
+            ]
+        }
+    ]
+}

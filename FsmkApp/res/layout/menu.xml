@@ -81,23 +81,24 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="5dp" >
 
-        <Button
-            android:id="@+id/fb"
+        <ImageView
+            android:id="@+id/camera"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/old_button_bg"
-            android:text="Facebook"
+            
+            android:src="@drawable/camlogo"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/tw"
+            android:id="@+id/gallery"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/old_button_bg"
-            android:text="Twitter"
+            android:text="Gallery"
             android:textColor="#ffffff"
             android:textSize="15sp" />
 

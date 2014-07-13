@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fsmkapp"
+    android:installLocation="auto"
     android:versionCode="1"
-    android:versionName="1.0"
-    android:installLocation="auto" >
+    android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
+
+    <uses-feature android:name="android.hardware.camera" >
+    </uses-feature>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +21,35 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.fsmkapp.MainActivity"
-            android:label="@string/app_name" >
-           
+            android:name="com.example.fsmkapp.ScheduleActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            
+        </activity>
+        <activity
+            android:name="com.example.fsmkapp.VolunteerActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            
         </activity>
         <activity
             android:name="com.example.fsmkapp.DisplayDetails"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="SplashScreen"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="MenuActivity"
+            android:screenOrientation="portrait" >
         </activity>
 
         <receiver android:name="com.example.fsmkapp.FsmkReceiver" >
@@ -32,18 +60,10 @@
         <service android:name="com.example.fsmkapp.AlarmMusicService" >
         </service>
 
-        <activity
-            android:name="com.example.fsmkapp.VolunteersActivity"
-            android:label="@string/title_activity_volunteers" >
-        </activity>
-        <activity android:name="SplashScreen">
-             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+      
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name="MenuActivity"></activity>
+        <service android:name="com.helper.fsmk.ExportBmpService" >
+        </service>
     </application>
 
 </manifest>
