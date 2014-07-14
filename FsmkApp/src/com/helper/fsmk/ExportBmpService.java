@@ -18,18 +18,23 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
-import android.provider.MediaStore.Images.Media;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
 public class ExportBmpService extends Service {
-
+	File f;
+	Context mContext;
+	Intent mIntent;
+	double mScreenInch=0;
 	@Override
 	public IBinder onBind(Intent intent) {
 		// TODO Auto-generated method stub
@@ -44,34 +49,71 @@ public class ExportBmpService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
 		super.onStartCommand(intent, flags, startId);;
-
+		mContext=this;
+		mIntent=intent;
+		mScreenInch=intent.getExtras().getDouble("inch");
         final File file = getTempFile(this);
-        try {
-          Bitmap captureBmp = Media.getBitmap(getContentResolver(), Uri.fromFile(file) );
+        //Bitmap captureBmp = Media.getBitmap(getContentResolver(), Uri.fromFile(file) );
           //captureBmp=drawTextToBitmap(getApplicationContext(), captureBmp, "test data");
-          captureBmp=addTextToBitmap("", captureBmp);
+         Bitmap captureBmp=addTextToBitmap("", getSavedBitmap());
           createFile(captureBmp);
          
           // do whatever you want with the bitmap (Resize, Rename, Add To Gallery, etc)
           //imgFavorite.setImageBitmap(captureBmp);
-          Toast.makeText(getApplicationContext(), "Photo saved ", 0).show();
-        } catch (FileNotFoundException e) {
-          e.printStackTrace();
-          Toast.makeText(getApplicationContext(), "file not found exception", 0).show();
-        } catch (IOException e) {
-          e.printStackTrace();
-          Toast.makeText(getApplicationContext(), "exception", 0).show();
-        }
+        //  sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+          refreshGallery(f);
+          
+		   // Toast.makeText(getApplicationContext(), "Photo ondestroy ", 0).show();
+		    Toast.makeText(getApplicationContext(), "Photo saved "+(int)mScreenInch, 0).show();
 		return Service.START_NOT_STICKY;
 		
+	}
+	private void refreshGallery(File f) {
+		// TODO Auto-generated method stub
+		Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+	    Uri contentUri = Uri.fromFile(f);
+	    mediaScanIntent.setData(contentUri);
+	    getApplicationContext().sendBroadcast(mediaScanIntent);
 	}
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		super.onDestroy();
-		 sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+		
+		// sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+		// sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+		/* Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+		    Uri contentUri = Uri.fromFile(f);
+		    mediaScanIntent.setData(contentUri);
+		    getApplicationContext().sendBroadcast(mediaScanIntent);
+		    Toast.makeText(getApplicationContext(), "Photo ondestroy ", 0).show();*/
+		    super.onDestroy();
+		// scanSavedImage() ;
 	}
 	
+	private void scanSavedImage() {
+		// TODO Auto-generated method stub
+		 MediaScannerConnection.scanFile(this, new String[] { Environment.getExternalStorageDirectory().toString() }, null, new MediaScannerConnection.OnScanCompletedListener() {
+	            /*
+	             *   (non-Javadoc)
+	             * @see android.media.MediaScannerConnection.OnScanCompletedListener#onScanCompleted(java.lang.String, android.net.Uri)
+	             */
+	            public void onScanCompleted(String path, Uri uri) 
+	              {
+	                  Log.e("pkhtag", "Scanned " + path + ":");
+	                  Log.e("pkhtag", "-> uri=" + uri);
+	              }
+	            });
+
+	}
+	private Bitmap getSavedBitmap() {
+		// TODO Auto-generated method stub
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		Bitmap bitmap = BitmapFactory.decodeFile(getTempFile(getApplicationContext()).getAbsolutePath(),options);
+		//selected_photo.setImageBitmap(bitmap);
+		return bitmap;
+
+	}
 	
 	private File getTempFile(Context context){
 		  //it will return /sdcard/image.tmp
@@ -98,7 +140,7 @@ public class ExportBmpService extends Service {
         
         
 		//you can create a new file name "test.jpg" in sdcard folder.
-		File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/FSMK_SummerCamp/FSMK_"+formattedDate+".jpg");
+		 f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/FSMK_SummerCamp/FSMK_"+formattedDate+".jpg");
 		try {
 			f.createNewFile();
 			//write the bytes in file
@@ -121,7 +163,7 @@ public class ExportBmpService extends Service {
 		  Paint paint = new Paint();
 		  canvas.drawBitmap(alteredBitmap, 0, 0, paint);
 		  paint.setColor(Color.RED); 
-		  int textSize=getTextSizeAptForScreenSize();
+		  int textSize=getTextSize();
 		  paint.setTextSize(textSize);
 		 
 		  canvas.drawText("FSMK_SummerCamp-14", 50,canvas.getHeight()-175, paint); 
@@ -129,7 +171,20 @@ public class ExportBmpService extends Service {
 		  return alteredBitmap;
 		  
 	}
-	private int getTextSizeAptForScreenSize() {
+	private int getTextSize() {
+		// TODO Auto-generated method stub
+		if(mScreenInch<3){ 
+			return 50;
+		}else if(mScreenInch>3 && mScreenInch <4.5){
+			return 65;
+		}else if(mScreenInch>4.5 && mScreenInch <5.3){
+			return 90;
+		}else{
+			return 110;
+		}
+
+	}
+	/*private int getTextSizeAptForScreenSize() {
 		// TODO Auto-generated method stub
 
 		
@@ -156,7 +211,8 @@ public class ExportBmpService extends Service {
 		    }
 
 
-	}
+	}*/
+	
 	public Bitmap textAsBitmap(String text, float textSize, int textColor) {
 	    Paint paint = new Paint();
 	    paint.setTextSize(textSize);

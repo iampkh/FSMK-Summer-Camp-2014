@@ -2,29 +2,32 @@ package com.example.fsmkapp;
 
 import java.io.File;
 
-import com.helper.fsmk.ExportBmpService;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.FeatureInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.helper.fsmk.ExportBmpService;
 
 public class MenuActivity extends Activity implements OnClickListener {
 
 	/** Called when the activity is first created. */
 	Button scheduleBtn, volunteerBtn, reminderBtn, galleryBtn, aboutUsBtn;
 	ImageView camBtn;
+	public static String FSMK_SC="FSMK_SummerCamp";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class MenuActivity extends Activity implements OnClickListener {
 		getTextSizeAptForScreenSize();
 		// TODO Auto-generated method stub
 	}
+
 	private void getTextSizeAptForScreenSize() {
 		// TODO Auto-generated method stub
 
@@ -79,7 +83,8 @@ public class MenuActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.gallery:
-			 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+			// sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+			//refreshGallery(f);
 			Intent galleryintent = new Intent(Intent.ACTION_VIEW, Uri.parse("content://media/internal/images/media")); 
 			galleryintent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 			startActivity(galleryintent);
@@ -105,6 +110,32 @@ public class MenuActivity extends Activity implements OnClickListener {
 		  }
 		  return new File(path, "image.tmp");
 		}
+	private Bitmap getSavedBitmap() {
+		// TODO Auto-generated method stub
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		Bitmap bitmap = BitmapFactory.decodeFile(getTempFile(getApplicationContext()).getAbsolutePath(),options);
+		//selected_photo.setImageBitmap(bitmap);
+		return bitmap;
+
+	}
+	private double getScreenSizeInch() {
+		// TODO Auto-generated method stub
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		int width=dm.widthPixels;
+		int height=dm.heightPixels;
+		int dens=dm.densityDpi;
+		double wi=(double)width/(double)dens;
+		double hi=(double)height/(double)dens;
+		double x = Math.pow(wi,2);
+		double y = Math.pow(hi,2);
+		double screenInches = Math.sqrt(x+y);
+		Log.e("pkhtag", "screen inches double="+screenInches);
+		Log.e("pkhtag", "screen inches integer="+(int)screenInches);
+		return screenInches;
+
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -113,6 +144,7 @@ public class MenuActivity extends Activity implements OnClickListener {
 		      switch(requestCode){
 		        case 1:
 		        	Intent serviceIntent=new Intent(getApplicationContext(), ExportBmpService.class);
+		        	serviceIntent.putExtra("inch", getScreenSizeInch());
 		        	startService(serviceIntent);
 		        break;
 		      }
@@ -122,7 +154,7 @@ public class MenuActivity extends Activity implements OnClickListener {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+		// sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
 	}
 
 }
