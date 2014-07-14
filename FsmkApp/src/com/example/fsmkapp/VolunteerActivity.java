@@ -11,7 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -22,6 +24,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helper.fsmk.ExpandableAdapter;
@@ -113,15 +116,23 @@ public class VolunteerActivity extends Activity {
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
 				final VolunteerDetail selectedDetail=listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition);
-				v.findViewById(R.id.callBtnList).setOnClickListener(new OnClickListener() {
+				/*v.findViewById(R.id.callBtnList).setOnClickListener(new OnClickListener() {
 					
 					@Override
-					public void onClick(View v) {
+					public void onClick(View v) {*/
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), selectedDetail.getmName(), 0).show();
+						//Toast.makeText(getApplicationContext(), selectedDetail.getmName(), 0).show();
+						TextView telView=(TextView) v.findViewById(R.id.numberText);
+						String telNO=(String) telView.getText();
+						if(telNO.length()<11 && telNO.length()==10){
+							telNO="0"+telNO;
+						}
+						Intent callIntent = new Intent(Intent.ACTION_CALL);
+						callIntent.setData(Uri.parse("tel:"+telNO));
+						startActivity(callIntent);
 						
-					}
-				});
+				/*	}
+				});*/
 				
 				/*Toast.makeText(
 						getApplicationContext(),

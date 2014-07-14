@@ -64,7 +64,7 @@ public class ExportBmpService extends Service {
           refreshGallery(f);
           
 		   // Toast.makeText(getApplicationContext(), "Photo ondestroy ", 0).show();
-		    Toast.makeText(getApplicationContext(), "Photo saved "+(int)mScreenInch, 0).show();
+		    Toast.makeText(getApplicationContext(), "Photo saved ", 0).show();
 		return Service.START_NOT_STICKY;
 		
 	}
