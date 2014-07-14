@@ -25,5 +25,8 @@
     <string name="TitleHostelVolunteer">HostelVolunteer :</string>
     <string name="HostelVolunteerName">HostelVolunteerName</string>
     <string name="HostelVolunteerContact">HostelVolunteerContact</string>
+    <string name="FreeSoftwareFreeSociety">Free software, Free society</string>
+    <string name="FreeSoftwareFreeinFreedom">Free Software Free as in freedom</string>
+  
 
 </resources>

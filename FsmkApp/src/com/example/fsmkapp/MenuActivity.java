@@ -90,7 +90,8 @@ public class MenuActivity extends Activity implements OnClickListener {
 			startActivity(galleryintent);
 			break;
 		case R.id.aboutus:
-
+			Intent aboutUs=new Intent(getApplicationContext(), AboutUs.class);
+			startActivity(aboutUs);
 			break;
 		case R.id.camera:
 			  Intent camIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
