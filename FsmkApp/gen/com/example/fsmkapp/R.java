@@ -54,7 +54,7 @@ public final class R {
         public static final int gallery=0x7f09001e;
         public static final int header1=0x7f090000;
         public static final int header2=0x7f090002;
-        public static final int imageView1=0x7f090004;
+        public static final int imageView1=0x7f090007;
         public static final int itemContainer=0x7f090022;
         public static final int linearLayout1=0x7f090019;
         public static final int listView1=0x7f090018;
@@ -69,9 +69,9 @@ public final class R {
         public static final int tableRow3=0x7f09002f;
         public static final int tableRow4=0x7f090032;
         public static final int tableRow5=0x7f090034;
-        public static final int textView1=0x7f090005;
-        public static final int textView2=0x7f090006;
-        public static final int textView3=0x7f090007;
+        public static final int textView1=0x7f090004;
+        public static final int textView2=0x7f090005;
+        public static final int textView3=0x7f090006;
         public static final int textnotify=0x7f090008;
         public static final int tw=0x7f090021;
         public static final int txtDescription=0x7f090011;

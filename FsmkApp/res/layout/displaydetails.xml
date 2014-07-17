@@ -119,22 +119,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:text="@string/venue" />
-
-            <Button
-                android:id="@+id/btnSetAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="setAlarm"
-                android:textColor="#000000"
-                android:text="@string/setAlarm" />
-
-            <Button
-                android:id="@+id/btnAbtVolunteers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="aboutVoulteers"
-                android:textColor="#000000"
-                android:text="@string/aboutVolunteers" />
         </LinearLayout>
     </ScrollView>
 

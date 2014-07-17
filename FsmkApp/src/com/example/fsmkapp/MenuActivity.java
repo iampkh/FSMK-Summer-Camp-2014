@@ -5,6 +5,7 @@ import java.io.File;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,12 +29,23 @@ public class MenuActivity extends Activity implements OnClickListener {
 	Button scheduleBtn, volunteerBtn, reminderBtn, galleryBtn, aboutUsBtn;
 	ImageView camBtn;
 	public static String FSMK_SC="FSMK_SummerCamp";
-
+	SharedPreferences mSharedPref;
+    public static String PREF_SCHEDULE="fsmk_schedule";
+    public static String PREF_VOLUNTEER="fsmk_volunteer";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
+		//First time fetching data from server
+		mSharedPref=getSharedPreferences("fsmk",Context.MODE_PRIVATE);
+		String scheduleJsonString=mSharedPref.getString(PREF_SCHEDULE, "");
+		if(scheduleJsonString!=null && !scheduleJsonString.equals("")){
+			
+		}
+		
+		//End of first time fetching data from server 
+		
 		scheduleBtn = (Button) findViewById(R.id.schedule);
 		volunteerBtn = (Button) findViewById(R.id.volunteer);
 		reminderBtn = (Button) findViewById(R.id.reminder);
