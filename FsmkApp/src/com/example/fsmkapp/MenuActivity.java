@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.helper.fsmk.DataFetchService;
 import com.helper.fsmk.ExportBmpService;
 
 public class MenuActivity extends Activity implements OnClickListener {
@@ -32,19 +33,13 @@ public class MenuActivity extends Activity implements OnClickListener {
 	SharedPreferences mSharedPref;
     public static String PREF_SCHEDULE="fsmk_schedule";
     public static String PREF_VOLUNTEER="fsmk_volunteer";
+    public static String SHARED_PREF_NAME="fsmk";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.menu);
-		//First time fetching data from server
-		mSharedPref=getSharedPreferences("fsmk",Context.MODE_PRIVATE);
-		String scheduleJsonString=mSharedPref.getString(PREF_SCHEDULE, "");
-		if(scheduleJsonString!=null && !scheduleJsonString.equals("")){
-			
-		}
 		
-		//End of first time fetching data from server 
 		
 		scheduleBtn = (Button) findViewById(R.id.schedule);
 		volunteerBtn = (Button) findViewById(R.id.volunteer);
@@ -65,9 +60,29 @@ public class MenuActivity extends Activity implements OnClickListener {
 		getTempFile(this);
 
 		getTextSizeAptForScreenSize();
+		//First time fetching data from server
+				
+				
+				
+				//End of first time fetching data from server 
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mSharedPref = getSharedPreferences(SHARED_PREF_NAME,
+				Context.MODE_PRIVATE);
+		String scheduleJsonString = mSharedPref.getString(PREF_SCHEDULE, "");
+		if (scheduleJsonString == null || scheduleJsonString.replace(" ", "").equals("")) {
+			// startService(new Intent(getApplicationContext(),
+			// DataFetchService.class));
+			Intent intent = new Intent(getApplicationContext(),
+					DataFetchService.class);
+			startService(intent);
+		}
+	}
 	private void getTextSizeAptForScreenSize() {
 		// TODO Auto-generated method stub
 

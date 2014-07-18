@@ -11,7 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -201,8 +203,11 @@ public class VolunteerActivity extends Activity {
 			int size = inputStream.available();
 			byte data[] = new byte[size];
 			inputStream.read(data);
-			String eventDetails = new String(data, "UTF-8");
+			String defaultdata = new String(data, "UTF-8");
 
+			SharedPreferences mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+			String eventDetails=mPref.getString(MenuActivity.PREF_VOLUNTEER, defaultdata);
+			
 			mjsonEventDetails = new JSONObject(eventDetails);
 			//JSONObject mTimelineJsonObj=mjsonEventDetails.getJSONObject("timeline");
 			meventDetailsArray =mjsonEventDetails.getJSONArray("volunteer");

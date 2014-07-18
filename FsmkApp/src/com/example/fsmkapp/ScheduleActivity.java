@@ -12,7 +12,9 @@ import org.json.JSONObject;
 import android.net.NetworkInfo.DetailedState;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -72,14 +74,22 @@ public class ScheduleActivity extends Activity {
 	
 
 	public void getData() {
+		
+		
+		
+		
 		try {
 			InputStream inputStream = getApplicationContext().getAssets().open(
 					"new_event.json");
 			int size = inputStream.available();
 			byte data[] = new byte[size];
 			inputStream.read(data);
-			String eventDetails = new String(data, "UTF-8");
-
+			String defaultString = new String(data, "UTF-8");
+			
+			SharedPreferences mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME,Context.MODE_PRIVATE);
+			String eventDetails=mPref.getString(MenuActivity.PREF_SCHEDULE, defaultString);
+			Log.e("pkhtag-schedulejson", "schedule json="+eventDetails);
+			
 			mjsonEventDetails = new JSONObject(eventDetails);
 			JSONObject mTimelineJsonObj=mjsonEventDetails.getJSONObject("timeline");
 			meventDetailsArray =mTimelineJsonObj.getJSONArray("date");

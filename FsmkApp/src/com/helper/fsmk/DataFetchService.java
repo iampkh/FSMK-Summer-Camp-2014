@@ -1,7 +1,12 @@
 package com.helper.fsmk;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.StringTokenizer;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,7 +30,7 @@ import com.example.fsmkapp.MenuActivity;
 public class DataFetchService extends Service{
 	String xml;
 	String parseddata=null;
-	String url_default="https://puduvaiglug.wordpress.com/feed/",url_schedule="",url_volunteer="";
+	String url_default="https://puduvaiglug.wordpress.com/feed/",url_schedule="http://camp.fsmk.org/events.json",url_volunteer="http://camp.fsmk.org/volunteers.json";
 	SharedPreferences mPref=null;
 	SharedPreferences.Editor mEd=null;
 	Intent intent;
@@ -51,10 +56,10 @@ public class DataFetchService extends Service{
 public void onCreate() {
 
 // TODO Auto-generated method stub
-
+        
 //Toast.makeText(this, "MyAlarmService.onCreate()", //Toast.LENGTH_LONG).show();
-	mPref=getSharedPreferences(MenuActivity.PREF_SCHEDULE, Context.MODE_PRIVATE);;
-	
+	mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);;
+	Log.e("pkhtag", "service oncreate ");
 
 }
 
@@ -87,7 +92,39 @@ super.onDestroy();
 //dataBase.closeDB();
 
 }
+private String readJsonFromServer(String url) {
+	// TODO Auto-generated method stub
+	  URL textUrl;
+	 // String content="";
+	  String stringText = "";
+	  try {
+	   textUrl = new URL(url);
+	   BufferedReader bufferReader = new BufferedReader(new InputStreamReader(textUrl.openStream()));
+	   String StringBuffer;
+	   
+	   while ((StringBuffer = bufferReader.readLine()) != null) {
+	    stringText += StringBuffer;
+	   }
+	         bufferReader.close();
+	       //  textMsg.setText(stringText);
+	  } catch (MalformedURLException e) {
+	   // TODO Auto-generated catch block
+		  Log.e("pkhtag", "data of read malformed="+e.toString());
+		  
+	   e.printStackTrace();
+	  // textMsg.setText(e.toString());
+	   
+	  } catch (IOException e) {
+	   // TODO Auto-generated catch block
+	   e.printStackTrace();
+	 //  textMsg.setText(e.toString());
+	   Log.e("pkhtag", "data of read io exce="+e.toString());
+	  }
+	  
+	  Log.e("pkhtag", "data of read json="+stringText);
 
+	  return stringText;
+}
 
 
 @Override
@@ -107,7 +144,12 @@ public void onStart(Intent intent, int startId) {
 	 Log.e("pkhtag", "pkh database opened table size is="+tablenameLIst.size());
 	//isFromActivity=intent.getExtras().getBoolean(IS_FROM_ACTIVITY_STRING);
 //	Log.e("pkhtag", "pkh boolean is from activity="+isFromActivity);
-*/	mPref=getSharedPreferences(MenuActivity.PREF_SCHEDULE,Context.MODE_PRIVATE);
+  Log.e("pkhtag", "service oncreate ");
+  readJsonFromServer
+*/
+	
+	 Log.e("pkhtag", "service onstart ");
+	 mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME, Context.MODE_PRIVATE);;
 	
 		
 			//mPrefPos=getPrefStartPosition(0);
@@ -309,7 +351,10 @@ class MyFetching extends AsyncTask<String, Void, Void>{
 	protected Void doInBackground(String... params) {
 		// TODO Auto-generated method stub
 //		Log.d("pkh data received", "data received="+getXmlFromUrl(params[0]));
-		try{
+		
+		parseddata_schedule=readJsonFromServer(url_schedule);
+		parseddata_volunteer=readJsonFromServer(url_volunteer);
+		/*try{
 			if(!params[0].replace(" ", "").equalsIgnoreCase(""))
 			{
 				parseddata_schedule=getJsonFromUrl(params[0]).replaceAll("&#8211;","-");
@@ -319,7 +364,7 @@ class MyFetching extends AsyncTask<String, Void, Void>{
 		}catch(Exception e){
 			
 		}
-		
+		*/
 		Log.d("TAG_PKH", "pkh datafetched="+xml);
 		return null;
 	}
@@ -335,10 +380,14 @@ class MyFetching extends AsyncTask<String, Void, Void>{
 	protected void onPostExecute(Void result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
+		
+		
+		 mEd = mPref.edit();
 		mEd.putString(MenuActivity.PREF_SCHEDULE, parseddata_schedule);
 		mEd.putString(MenuActivity.PREF_VOLUNTEER, parseddata_volunteer);
-		
-		
+		mEd.commit();
+		Log.e("pkhtag", "json file of schedule="+mPref.getString(MenuActivity.PREF_SCHEDULE, "def"));;
+		Log.e("pkhtag", "\njson file of volunteer="+mPref.getString(MenuActivity.PREF_VOLUNTEER ,"defvol"));
 		/*FeedParser parser=new FeedParser(parseddata);
 	//	pr.dismiss();
 		//listfeed.setText(parser.getParsedData());
