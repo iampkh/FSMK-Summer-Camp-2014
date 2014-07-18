@@ -197,13 +197,14 @@ public class VolunteerActivity extends Activity {
 		
 	}
 	public void getData() {
+		String defaultdata="";
 		try {
 			InputStream inputStream = getApplicationContext().getAssets().open(
 					"volunteer.json");
 			int size = inputStream.available();
 			byte data[] = new byte[size];
 			inputStream.read(data);
-			String defaultdata = new String(data, "UTF-8");
+			 defaultdata = new String(data, "UTF-8");
 
 			SharedPreferences mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME,Context.MODE_PRIVATE);
 			String eventDetails=mPref.getString(MenuActivity.PREF_VOLUNTEER, defaultdata);
@@ -215,10 +216,27 @@ public class VolunteerActivity extends Activity {
 		
 		} catch (JSONException e) {
 			e.printStackTrace();
+			
+			
+			//JSONObject mTimelineJsonObj=mjsonEventDetails.getJSONObject("timeline");
+			try {
+				mjsonEventDetails = new JSONObject(defaultdata);
+				meventDetailsArray =mjsonEventDetails.getJSONArray("volunteer");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		catch (IOException e) {
 			e.printStackTrace();
+			try {
+				mjsonEventDetails = new JSONObject(defaultdata);
+				meventDetailsArray =mjsonEventDetails.getJSONArray("volunteer");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} 
 		
 		
@@ -227,23 +245,23 @@ public class VolunteerActivity extends Activity {
 	public int getScreenSize() {
 		// TODO Auto-generated method stub
 		 if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE) {     
-		        Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
+		      //  Toast.makeText(this, "Large screen",Toast.LENGTH_LONG).show();
 		        return LARGE;
 		    }
 		    else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL) {     
-		        Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
+		      //  Toast.makeText(this, "Normal sized screen" , Toast.LENGTH_LONG).show();
 		        return NORMAL;
 		    } 
 		    else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL) {     
-		        Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
+		      //  Toast.makeText(this, "Small sized screen" , Toast.LENGTH_LONG).show();
 		        return SMALL;
 		    }
 		    else if ((getResources().getConfiguration().screenLayout &      Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE) {     
-		        Toast.makeText(this, "Xlarge sized screen" , Toast.LENGTH_LONG).show();
+		     //   Toast.makeText(this, "Xlarge sized screen" , Toast.LENGTH_LONG).show();
 		        return XLARGE;
 		    }
 		    else {
-		        Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
+		     //   Toast.makeText(this, "Screen size is neither large, normal or small" , Toast.LENGTH_LONG).show();
 		        return UNDEFINED;
 		    }
 

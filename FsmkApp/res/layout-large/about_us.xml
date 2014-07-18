@@ -9,7 +9,7 @@
     <ScrollView 
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="45dp"
         >
     <LinearLayout 
         android:layout_width="wrap_content"
@@ -22,9 +22,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:drawable/divider_horizontal_dark"
-        android:text="TextView" />
+        android:text="@string/FreeSoftwareFreeSociety" />
      <TextView
         android:id="@+id/contentHeader1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+      <TextView
+        android:id="@+id/contentHeader2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+        <TextView
+        android:id="@+id/contentHeader4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
@@ -38,15 +62,56 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:drawable/divider_horizontal_dark"
-        android:text="TextView" />
+        android:text="@string/FreeSoftwareFreeinFreedom" />
        <TextView
-        android:id="@+id/contentHeader2"
+        android:id="@+id/contentHeader_II1"
         android:layout_width="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
          android:padding="5dp"
         android:background="@android:drawable/editbox_background"
         android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader_II2"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+         android:padding="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader_II3"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+         android:padding="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader_II4"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+         android:padding="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader_II5"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+         android:padding="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       <TextView
+        android:id="@+id/contentHeader_II6"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+         android:padding="5dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="TextView" />
+       
     </LinearLayout>
 	</ScrollView>
 </LinearLayout>

@@ -3,11 +3,16 @@ package com.example.fsmkapp;
 import java.io.File;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,6 +39,7 @@ public class MenuActivity extends Activity implements OnClickListener {
     public static String PREF_SCHEDULE="fsmk_schedule";
     public static String PREF_VOLUNTEER="fsmk_volunteer";
     public static String SHARED_PREF_NAME="fsmk";
+    public boolean isNetworkPresent=false;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,6 +73,39 @@ public class MenuActivity extends Activity implements OnClickListener {
 				//End of first time fetching data from server 
 		// TODO Auto-generated method stub
 	}
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		isNetworkPresent=isNetworkAvailable();
+	}
+	private boolean isNetworkAvailable() {
+		
+		
+		ConnectivityManager conMan = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		//mobile
+		State mobile = conMan.getNetworkInfo(0).getState();
+
+		//wifi
+		State wifi = conMan.getNetworkInfo(1).getState();
+
+
+		if (mobile == NetworkInfo.State.CONNECTED || mobile == NetworkInfo.State.CONNECTING ||wifi == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTING) 
+		{
+		    //mobile 
+			return true;
+		}
+		else if (mobile == NetworkInfo.State.DISCONNECTED && mobile == NetworkInfo.State.DISCONNECTING && wifi == NetworkInfo.State.DISCONNECTED && wifi == NetworkInfo.State.DISCONNECTING) 
+		{
+		    //wifi
+			return false;
+		}
+		return false;
+		
+		
+
+		}
 
 	@Override
 	protected void onResume() {
@@ -78,9 +117,35 @@ public class MenuActivity extends Activity implements OnClickListener {
 		if (scheduleJsonString == null || scheduleJsonString.replace(" ", "").equals("")) {
 			// startService(new Intent(getApplicationContext(),
 			// DataFetchService.class));
+			if(isNetworkPresent){
 			Intent intent = new Intent(getApplicationContext(),
 					DataFetchService.class);
 			startService(intent);
+			}else{
+				AlertDialog.Builder builder=new AlertDialog.Builder(this);
+				builder.setTitle("Need to fetch data from server");
+				builder.setMessage("1.'OK' will switch on the Mobile data \n2. 'Cancel' will keep dummy information");
+				builder.create();
+				builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						startActivity(new Intent("android.settings.WIRELESS_SETTINGS"));
+					}
+				});
+				builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						//startActivity(new Intent("android.settings.WIRELESS_SETTINGS"));
+					}
+				});
+				
+				
+				builder.show();
+			}
 		}
 	}
 	private void getTextSizeAptForScreenSize() {

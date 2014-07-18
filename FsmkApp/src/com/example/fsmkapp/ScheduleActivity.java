@@ -77,14 +77,14 @@ public class ScheduleActivity extends Activity {
 		
 		
 		
-		
+		String defaultString ="";
 		try {
 			InputStream inputStream = getApplicationContext().getAssets().open(
 					"new_event.json");
 			int size = inputStream.available();
 			byte data[] = new byte[size];
 			inputStream.read(data);
-			String defaultString = new String(data, "UTF-8");
+			defaultString = new String(data, "UTF-8");
 			
 			SharedPreferences mPref=getSharedPreferences(MenuActivity.SHARED_PREF_NAME,Context.MODE_PRIVATE);
 			String eventDetails=mPref.getString(MenuActivity.PREF_SCHEDULE, defaultString);
@@ -97,10 +97,28 @@ public class ScheduleActivity extends Activity {
 		
 		} catch (JSONException e) {
 			e.printStackTrace();
+			try {
+				mjsonEventDetails = new JSONObject(defaultString);
+				JSONObject mTimelineJsonObj=mjsonEventDetails.getJSONObject("timeline");
+				meventDetailsArray =mTimelineJsonObj.getJSONArray("date");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 
 		catch (IOException e) {
 			e.printStackTrace();
+			try {
+				mjsonEventDetails = new JSONObject(defaultString);
+				JSONObject mTimelineJsonObj=mjsonEventDetails.getJSONObject("timeline");
+				meventDetailsArray =mTimelineJsonObj.getJSONArray("date");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		} 
 		
 		

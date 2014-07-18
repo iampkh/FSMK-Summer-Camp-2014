@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.fsmkapp.MenuActivity;
 
@@ -313,7 +314,7 @@ private void ShowNotification() {
 	}
 }
 */
-public String getJsonFromUrl(String params) {
+/*public String getJsonFromUrl(String params) {
 	 xml = null;
 
 	try {
@@ -340,7 +341,7 @@ public String getJsonFromUrl(String params) {
 	//if(xml!=null)
 	Log.d("TAG", "pkh-- fetch="+xml);
 	return xml;
-}
+}*/
 class MyFetching extends AsyncTask<String, Void, Void>{
 	//final ProgressDialog pr=new ProgressDialog(this);
 	String parseddata_schedule=null;
@@ -383,8 +384,15 @@ class MyFetching extends AsyncTask<String, Void, Void>{
 		
 		
 		 mEd = mPref.edit();
+		 if(!mPref.getString(MenuActivity.PREF_SCHEDULE, "").equals(parseddata_schedule)){
 		mEd.putString(MenuActivity.PREF_SCHEDULE, parseddata_schedule);
+		 }
+		 if(!mPref.getString(MenuActivity.PREF_VOLUNTEER, "").equals(parseddata_volunteer)){
 		mEd.putString(MenuActivity.PREF_VOLUNTEER, parseddata_volunteer);
+	//	Toast.makeText(getApplicationContext(), "inserting ", 0).show();
+		 }else{
+	//		 Toast.makeText(getApplicationContext(), "not inserting ", 0).show();
+		 }
 		mEd.commit();
 		Log.e("pkhtag", "json file of schedule="+mPref.getString(MenuActivity.PREF_SCHEDULE, "def"));;
 		Log.e("pkhtag", "\njson file of volunteer="+mPref.getString(MenuActivity.PREF_VOLUNTEER ,"defvol"));
